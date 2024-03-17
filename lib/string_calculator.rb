@@ -5,8 +5,9 @@ class StringCalculator
   def initialize
     @called_count = 0
   end
-  
+
   def add(numbers)
+    @called_count += 1
     return 0 if numbers.empty?
     raise 'Invalid input' if numbers.match(/,\n/)
 
@@ -20,6 +21,7 @@ class StringCalculator
   end
 
   def get_called_count
+    @called_count
   end
 
   private
