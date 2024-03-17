@@ -17,7 +17,7 @@ class StringCalculator
     delimiters = extract_delimiters(numbers)
     numbers = remaining_text(numbers) if numbers.start_with?('//')
     handle_negative_numbers(numbers)
-    numbers.split(delimiters).map(&:to_i).sum
+    numbers.split(delimiters).map(&:to_i).select { |num| num <= 1000 }.sum
   end
 
   def get_called_count
