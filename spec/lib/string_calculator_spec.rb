@@ -66,6 +66,14 @@ RSpec.describe StringCalculator do
         expect { calculator.add("//&\n1&-2") }.to raise_error('Negatives not allowed: -2')
       end
     end
+
+    it 'supports multiple delimiters' do
+      expect(calculator.add("//*%\n1*2%3")).to eq(6)
+    end
+
+    it 'supports multiple delimiters with any length' do
+      expect(calculator.add("//***%%%\n1***2%%%3")).to eq(6)
+    end
   end
 
   describe '#extract_delimiters' do
