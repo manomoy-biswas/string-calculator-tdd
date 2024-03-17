@@ -15,6 +15,9 @@ class StringCalculator
     numbers.split(delimiters).map(&:to_i).sum
   end
 
+  def get_called_count
+  end
+
   private
 
   def extract_delimiters(numbers)
