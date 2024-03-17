@@ -2,6 +2,10 @@
 
 # class to calculate sum of digits in a string
 class StringCalculator
+  def initialize
+    @called_count = 0
+  end
+  
   def add(numbers)
     return 0 if numbers.empty?
     raise 'Invalid input' if numbers.match(/,\n/)
