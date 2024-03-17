@@ -4,10 +4,32 @@
 class StringCalculator
   def add(numbers)
     return 0 if numbers.empty?
+    raise 'Invalid input' if numbers.match(/,\n/)
 
     # keeping this conditional return to avoid split, map and sum operation for single digit string
     return numbers.to_i if numbers.length == 1
 
-    numbers.gsub('\n', ',').split(',').map(&:to_i).sum
+    delimiters = extract_delimiters(numbers)
+    numbers = remaining_text(numbers) if numbers.start_with?('//')
+    numbers.split(delimiters).map(&:to_i).sum
+  end
+
+  private
+
+  def extract_delimiters(numbers)
+    delimiters = [',', "\n"]
+    if numbers.start_with?('//')
+      custom_delimiters = numbers.match(delimiter_regex).captures[0].split('').uniq
+      delimiters += custom_delimiters if custom_delimiters
+    end
+    Regexp.union(delimiters)
+  end
+
+  def remaining_text(numbers)
+    numbers.match(delimiter_regex).post_match
+  end
+
+  def delimiter_regex
+    %r{//(.*?)\n}
   end
 end
