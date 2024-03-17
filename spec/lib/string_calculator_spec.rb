@@ -67,6 +67,12 @@ RSpec.describe StringCalculator do
       end
     end
 
+    context 'when number greter than 1000' do
+      it 'ignores the number' do
+        expect(calculator.add("2,1001")).to eq(2)
+      end
+    end
+
     it 'supports multiple delimiters' do
       expect(calculator.add("//*%\n1*2%3")).to eq(6)
     end
