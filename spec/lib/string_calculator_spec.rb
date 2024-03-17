@@ -5,8 +5,16 @@ RSpec.describe StringCalculator do
   let(:calculator) { StringCalculator.new }
 
   describe '#add' do
-    it 'returns 0 for an empty string' do
-      expect(calculator.add("")).to eq(0)
+    context 'when the input is empty' do
+      it 'returns 0' do
+        expect(calculator.add("")).to eq(0)
+      end
+    end
+
+    context 'when the input is a single number' do
+      it 'returns the number' do
+        expect(calculator.add("5")).to eq(5)
+      end
     end
   end
 end
