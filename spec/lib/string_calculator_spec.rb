@@ -28,5 +28,17 @@ RSpec.describe StringCalculator do
         expect(calculator.add("5,7,10,6,5,87")).to eq(120)
       end
     end
+
+    context 'when the input is unknown' do
+      it 'returns the sum of the numbers' do
+        expect(calculator.add("5,7,10,6,5,87")).to eq(120)
+      end
+    end
+
+    context 'when string includes new line insted of `,`' do
+      it 'returns the sum of the numbers' do
+        expect(calculator.add("5\n7,10")).to eq(22)
+      end
+    end
   end
 end
