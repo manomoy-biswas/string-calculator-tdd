@@ -11,6 +11,7 @@ class StringCalculator
 
     delimiters = extract_delimiters(numbers)
     numbers = remaining_text(numbers) if numbers.start_with?('//')
+    handle_negative_numbers(numbers)
     numbers.split(delimiters).map(&:to_i).sum
   end
 
@@ -31,5 +32,10 @@ class StringCalculator
 
   def delimiter_regex
     %r{//(.*?)\n}
+  end
+
+  def handle_negative_numbers(numbers)
+    negative_numbers = numbers.scan(/-\d+/)
+    raise "Negatives not allowed: #{negative_numbers.join(', ')}" if negative_numbers.any?
   end
 end

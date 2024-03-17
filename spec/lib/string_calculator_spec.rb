@@ -60,6 +60,12 @@ RSpec.describe StringCalculator do
         expect { calculator.add('1,-2,-3') }.to raise_error('Negatives not allowed: -2, -3')
       end
     end
+
+    context 'when custom delimiter used and nagative number present' do
+      it 'raises an error' do
+        expect { calculator.add("//&\n1&-2") }.to raise_error('Negatives not allowed: -2')
+      end
+    end
   end
 
   describe '#extract_delimiters' do
