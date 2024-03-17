@@ -33,14 +33,46 @@ RSpec.describe StringCalculator do
 
     context 'when string includes new line insted of `,`' do
       it 'returns the sum of the numbers' do
-        expect(calculator.add('5\n7,10')).to eq(22)
+        expect(calculator.add("5\n7,10")).to eq(22)
       end
     end
 
     context 'when different delimiters are used' do
       it 'returns the sum of the numbers' do
-        expect(calculator.add('//;\n1;2')).to eq(3)
+        expect(calculator.add("//;\n1;2")).to eq(3)
       end
+    end
+  end
+
+  describe '#extract_delimiters' do
+    context 'when custom delimiters are used' do
+      it 'returns the custom delimiters' do
+        delimiters = calculator.send(:extract_delimiters, "//;\n1;2")
+        expect(delimiters).to eq(/,|\n|;/)
+      end
+    end
+  end
+
+  describe '#remaining_text' do
+    context 'when custom delimiters are used' do
+      it 'returns the remaining text' do
+        remaining_text = calculator.send(:remaining_text, "//;\n1;2")
+        expect(remaining_text).to eq('1;2')
+      end
+    end
+
+    context 'when custom delimiter is `&`' do
+      it 'returns the remaining text' do
+        remaining_text = calculator.send(:remaining_text, "//&\n1&2")
+        expect(remaining_text).to eq('1&2')
+      end
+    end
+  end
+
+  describe '#delimiter_regex' do
+    it 'returns the delimiter regex' do
+      regex = calculator.send(:delimiter_regex)
+      expect(regex).to eq(%r{//(.*?)\n})
     end
   end
 end
