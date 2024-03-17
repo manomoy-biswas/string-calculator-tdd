@@ -74,19 +74,19 @@ RSpec.describe StringCalculator do
     end
 
     context 'when delimiter is of any length' do
-      it 'supports multiple delimiters' do
+      it 'supports multiple types of delimiters' do
         expect(calculator.add("//*%\n1*2%3")).to eq(6)
       end
 
-      it 'supports multiple delimiters with any length' do
+      it 'supports multiple types delimiters with any length' do
         expect(calculator.add("//***%%%\n1***2%%%3")).to eq(6)
       end
 
-      it 'supports multiple delimiters with any length' do
+      it 'supports delimiters with any length' do
         expect(calculator.add("//[***]\n1***2***3")).to eq(6)
       end
 
-      it 'supports multiple delimiters with any length with' do
+      it 'supports multiple delimiters' do
         expect(calculator.add("//[**][%%]\n1**2%%3")).to eq(6)
       end
     end
