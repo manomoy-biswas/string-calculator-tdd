@@ -107,4 +107,12 @@ RSpec.describe StringCalculator do
       expect(regex).to eq(%r{//(.*?)\n})
     end
   end
+
+  describe '#get_called_count' do
+    it 'returns the number of times add method was invoked' do
+      calculator.add('1,2,3')
+      calculator.add('4,5')
+      expect(calculator.get_called_count).to eq(2)
+    end
+  end
 end
